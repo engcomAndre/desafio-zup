@@ -5,20 +5,34 @@ import com.spring.demo.resources.PersonalDataResource;
 import com.spring.demo.services.PersonalDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping
 public class PersonalDataResourceImpl implements PersonalDataResource {
 
     @Autowired
     private PersonalDataService personalDataService;
 
     @Override
-    public ResponseEntity<List<PersonalData>> search(PersonalData personalData) {
-        return ResponseEntity.ok().body(personalDataService.searchAll());
+    public ResponseEntity<List<PersonalData>> searchPersonalData() {
+        return ResponseEntity.ok().body(personalDataService.searchPersonalData());
+    }
+
+    @Override
+    public ResponseEntity<PersonalData> createPersonalData(PersonalData personalData) {
+
+        personalData = personalDataService.createPersonalData(personalData);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(personalData.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).body(personalData);
     }
 }

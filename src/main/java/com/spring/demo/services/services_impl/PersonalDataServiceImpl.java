@@ -1,4 +1,4 @@
-package com.spring.demo.services.servicesImpl;
+package com.spring.demo.services.services_impl;
 
 import com.spring.demo.entities.PersonalData;
 import com.spring.demo.repositories.PersonalDataRepository;
@@ -14,13 +14,14 @@ public class PersonalDataServiceImpl implements PersonalDataService {
     @Autowired
     private PersonalDataRepository personalDataRepository;
 
+
     @Override
-    public PersonalData create(PersonalData personalData) {
+    public PersonalData createPersonalData(PersonalData personalData) {
         return personalDataRepository.save(personalData);
     }
 
     @Override
-    public List<PersonalData> searchAll() {
+    public List<PersonalData> searchPersonalData() {
         return personalDataRepository.findAll();
     }
 }

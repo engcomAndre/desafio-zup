@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface PersonalDataService {
 
-    PersonalData create(PersonalData personalData);
+    PersonalData createPersonalData(PersonalData personalData);
 
-    List<PersonalData> searchAll();
+    List<PersonalData> searchPersonalData();
+
 }
