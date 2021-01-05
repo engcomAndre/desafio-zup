@@ -1,31 +1,49 @@
 package com.spring.demo.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
+import static com.spring.demo.constants.ValidationMessages.*;
+
 @Entity
-public class PersonalData {
+public class PersonalDataValidation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @NotEmpty(message = NOT_EMPTY_MSG)
+    @NotBlank(message = NOT_BLANK_MSG)
+    @NotNull(message = NOT_NULL_MSG)
+    @Size(min = 5,max = 120,message = NAME_SIZE_MSG)
     private String name;
 
-    @Column(unique = true)
+    @Email(message = EMAIL_MSG)
+    @NotEmpty(message = NOT_EMPTY_MSG)
+    @NotBlank(message = NOT_BLANK_MSG)
+    @NotNull(message = NOT_NULL_MSG)
     private String email;
 
-    @Column(unique = true)
+    @NotEmpty(message = NOT_EMPTY_MSG)
+    @NotBlank(message = NOT_BLANK_MSG)
+    @NotNull(message = NOT_NULL_MSG)
+    @Pattern(regexp = "\\d{11}",message = CPF_REGEX_MSG)
     private String cpf;
 
+    @NotEmpty(message = NOT_EMPTY_MSG)
+    @NotBlank(message = NOT_BLANK_MSG)
+    @NotNull(message = NOT_NULL_MSG)
     private LocalDate bornDate;
 
-    public PersonalData() {
+    public PersonalDataValidation() {
 
     }
 
-    public PersonalData(Long id, String name, String email, String cpf, LocalDate bornDate) {
+    public PersonalDataValidation(Long id, String name, String email, String cpf, LocalDate bornDate) {
         this.id = id;
         this.name = name;
         this.email = email;

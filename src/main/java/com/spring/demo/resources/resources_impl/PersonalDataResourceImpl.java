@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class PersonalDataResourceImpl implements PersonalDataResource {
     }
 
     @Override
-    public ResponseEntity<PersonalData> createPersonalData(PersonalData personalData) {
+    public ResponseEntity<PersonalData> createPersonalData(@Valid PersonalData personalData) {
 
         personalData = personalDataService.createPersonalData(personalData);
 
